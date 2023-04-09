@@ -4,11 +4,13 @@ import {Details} from '../../../../components';
 import {getWeatherSelector} from '../../../../store/modules';
 import {useAppSelector} from '../../../../store/types';
 import DegreeView from './components/DegreeView';
+import {useThemeColor} from '../../../../hooks/useThemeColor';
 
 const TomorrowGroup = () => {
   const {theme} = useAppSelector(getWeatherSelector);
+  const {color} = useThemeColor(theme);
   return (
-    <TommorowGroupWrapper bgColor={theme}>
+    <TommorowGroupWrapper bgColor={color}>
       <Headline>Tomorrow</Headline>
       <DegreeView />
       <DetailsWrapper>

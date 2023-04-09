@@ -8,16 +8,18 @@ import {
 } from '../../../../store/modules';
 
 import {ListRenderItem} from 'react-native';
+import {useThemeColor} from '../../../../hooks/useThemeColor';
 
 const HoursList = () => {
   const {data, theme} = useAppSelector(getWeatherSelector);
   const currentTime = new Date().getHours();
+  const {color} = useThemeColor(theme);
   const renderItem: ListRenderItem<TForecastWeatherHourItem> = ({item}) => (
     <HourItem settings={item} />
   );
   return (
     <Container>
-      <StyledHeader color={theme}>Later...</StyledHeader>
+      <StyledHeader color={color}>Later...</StyledHeader>
       {data.forecast.forecastday.length !== 0 ? (
         <StyledFlatList
           showsHorizontalScrollIndicator={false}

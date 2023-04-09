@@ -17,7 +17,7 @@ export type TWeatherState = {
   data: TWeatherData;
   loading: boolean;
   error: TWeatherError;
-  theme: string;
+  theme: 'light' | 'dark';
 };
 
 // type TSelectedWeatherDataType = 'hour' | 'day' | 'current';

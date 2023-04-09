@@ -11,7 +11,7 @@ function* getWeatherWorker({payload}: TDataWrapper<string>) {
         locationQuery: payload,
       },
     );
-
+    console.log(res.data);
     yield put(weatherActions.setCurrentWeather(res.data));
   } catch (e) {
     if (typeof e === 'string') {

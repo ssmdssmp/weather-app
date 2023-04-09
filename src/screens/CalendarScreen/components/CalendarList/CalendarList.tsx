@@ -9,9 +9,9 @@ const CalendarList = () => {
   const {data} = useAppSelector(getWeatherSelector);
   return (
     <FlatList
-      style={{width: '90%', marginTop: '10%'}}
+      style={{width: '100%', marginTop: '10%'}}
       data={data.forecast.forecastday}
-      ItemSeparatorComponent={() => <View style={{height: 20}} />}
+      ItemSeparatorComponent={() => <View style={{height: 15}} />}
       renderItem={({item}) => <ListItem settings={item} />}
     />
   );

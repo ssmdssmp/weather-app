@@ -11,7 +11,6 @@ function* getListWorker({payload}: TDataWrapper<string>) {
         searchQuery: payload,
       },
     );
-    console.log(res.data);
     yield put(searchActions.setList(res.data));
   } catch (e) {
     if (typeof e === 'string') {

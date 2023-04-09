@@ -1,12 +1,18 @@
-import {View, Text} from 'react-native';
 import React from 'react';
 import {Search} from './components';
+import {ScreenWrapper} from '../../styled';
+import {useAppSelector} from '../../store/types';
+import {getWeatherSelector} from '../../store/modules';
+import {useThemeColor} from '../../hooks/useThemeColor';
+import {StyledScreenWrapper} from './styled';
 
-const SetLocationScreen = () => {
+const SetLocationScreen = ({setPage}) => {
+  const {theme} = useAppSelector(getWeatherSelector);
+  const {screenColor} = useThemeColor(theme);
   return (
-    <View>
-      <Search />
-    </View>
+    <StyledScreenWrapper bgColor={screenColor}>
+      <Search setPage={setPage} />
+    </StyledScreenWrapper>
   );
 };
 

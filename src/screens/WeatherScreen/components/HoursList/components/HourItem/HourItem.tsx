@@ -12,9 +12,11 @@ import {useColoredSvg} from '../../../../../../hooks/useColoredSvg';
 import {useAppSelector} from '../../../../../../store/types';
 import {getWeatherSelector} from '../../../../../../store/modules';
 import {Colors} from '../../../../../../styled';
+import {useThemeColor} from '../../../../../../hooks/useThemeColor';
 
 const HourItem = ({settings}: THourItemProps) => {
   const {theme} = useAppSelector(getWeatherSelector);
+  const {color} = useThemeColor(theme);
   const {formattedTime} = useFormattedTime(settings.time.split(' ')[1]);
   const {formattedDegree} = useFormattedDegrees(settings.temp_c);
   const {smallWeatherIcon} = useWeatherIcon({
@@ -24,7 +26,7 @@ const HourItem = ({settings}: THourItemProps) => {
   const [modifiedIcon, setModifiedIcon] = useState(smallWeatherIcons.clouds);
   const {coloredIcon} = useColoredSvg({
     xmlCode: smallWeatherIcon,
-    color: settings.is_day ? theme : Colors.white,
+    color: settings.is_day ? color : Colors.white,
   });
   useEffect(() => {
     if (coloredIcon && coloredIcon.length !== 0) {
@@ -32,12 +34,12 @@ const HourItem = ({settings}: THourItemProps) => {
     }
   }, [coloredIcon]);
   return (
-    <Container bgColor={settings.is_day ? Colors.white : theme}>
-      <HourText color={settings.is_day ? theme : Colors.white}>
+    <Container bgColor={settings.is_day ? Colors.white : color}>
+      <HourText color={settings.is_day ? color : Colors.white}>
         {formattedTime}
       </HourText>
-      <SvgXml height={20} width={20} xml={modifiedIcon} />
-      <HourText color={settings.is_day ? theme : Colors.white}>
+      <SvgXml height={25} width={25} xml={modifiedIcon} />
+      <HourText color={settings.is_day ? color : Colors.white}>
         {formattedDegree}
       </HourText>
     </Container>
