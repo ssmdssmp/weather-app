@@ -6,4 +6,5 @@ export enum Colors {
   nightBlue = '#192592',
   screenLight = '#ebebeb',
   screenDark = '#927efc',
+  whiteLowOpacity = 'rgba(255,255,255,0.6)',
 }

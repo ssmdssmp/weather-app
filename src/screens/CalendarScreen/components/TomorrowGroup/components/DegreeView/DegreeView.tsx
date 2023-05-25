@@ -1,8 +1,7 @@
 import React from 'react';
 import {SvgXml} from 'react-native-svg';
-import {useFormattedDegrees, useNewWeatherIcon} from '../../../../../../hooks';
-import {getWeatherSelector} from '../../../../../../store/modules';
-import {useAppSelector} from '../../../../../../store/types';
+import {useFormattedDegrees, useWeatherIcon} from '../../../../../../hooks';
+import {getWeatherSelector, useAppSelector} from '../../../../../../store';
 import {
   AdditionTemp,
   Container,
@@ -18,7 +17,7 @@ const DegreeView = () => {
   const code = tomorrow.day.condition.code;
   const isDay = 1;
   const dateString = new Date(tomorrow.date).toString().slice(0, 10);
-  const {bigWeatherIcon} = useNewWeatherIcon({code, isDay});
+  const {bigWeatherIcon} = useWeatherIcon({code, isDay});
   const {formattedDegree} = useFormattedDegrees(tomorrow.day.avgtemp_c);
 
   return (

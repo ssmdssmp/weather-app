@@ -10,6 +10,7 @@ const initialState: TWeatherState = {
     errorMessage: '',
   },
   theme: 'light',
+  showIsYourCityTooltip: false,
 };
 export const slice = createSlice({
   name: 'weather',
@@ -31,6 +32,19 @@ export const slice = createSlice({
     },
     setTheme: (state, {payload}: TDataWrapper<'light' | 'dark'>) => {
       state.theme = payload;
+    },
+    getInitialLocation: state => {
+      state.loading = true;
+    },
+    getInitialLocationSuccess: state => {
+      state.showIsYourCityTooltip = true;
+      state.loading = false;
+    },
+    hideYourCityTooltip: state => {
+      state.showIsYourCityTooltip = false;
+    },
+    clearData: state => {
+      state.data = initWeatherData;
     },
   },
 });

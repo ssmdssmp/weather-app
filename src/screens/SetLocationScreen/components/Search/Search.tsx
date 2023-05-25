@@ -1,15 +1,29 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useRef, useState} from 'react';
-import {FlatList, View} from 'react-native';
-import {useDebouncedValue} from '../../../../hooks';
-import {useThemeColor} from '../../../../hooks/useThemeColor';
-import {getSearchSelector, getWeatherSelector} from '../../../../store/modules';
-import {searchActions} from '../../../../store/modules/search/reducer';
-import {useAppDispatch, useAppSelector} from '../../../../store/types';
-import {SearchListItem} from './components';
-import {StyledInput, Wrapper} from './styled';
+import {useDebouncedValue, useThemeColor} from '../../../../hooks';
+import {
+  getSearchSelector,
+  getWeatherSelector,
+  searchActions,
+  useAppSelector,
+  useAppDispatch,
+} from '../../../../store';
+
+import {SearchListHeaderComponent, SearchListItem} from './components';
+import {
+  SearchIcon,
+  SearchItemSeparator,
+  SearchListSeparator,
+  StyledInput,
+  Wrapper,
+} from './styled';
 import {Animated} from 'react-native';
-import {weatherActions} from '../../../../store/modules/weather/reducer';
-const Search = ({setPage}) => {
+import {searchIcon} from '../../../../assets/kit';
+import {TSearchProps} from './types';
+import {Colors} from '../../../../styled';
+import {FlatListStyles, ListHeaderComponentStyle} from './config';
+
+const Search = ({setPage}: TSearchProps): JSX.Element => {
   const {list} = useAppSelector(getSearchSelector);
   const {theme, data} = useAppSelector(getWeatherSelector);
   const [inputValue, setInputValue] = useState('');
@@ -66,44 +80,43 @@ const Search = ({setPage}) => {
 
   useEffect(() => {
     setPage(1);
-    console.log(1);
+    setInputValue('');
   }, [data.forecast]);
 
   return (
     <Wrapper>
+      <SearchIcon
+        xml={searchIcon}
+        fill={isFocused ? Colors.white : Colors.whiteLowOpacity}
+      />
       <StyledInput
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         bgColor={color}
         value={inputValue}
-        placeholderTextColor={isFocused ? 'rgba(7, 103, 168,0.7)' : color}
+        placeholderTextColor={Colors.whiteLowOpacity}
         placeholder={data.location.name}
-        selectionColor={color}
+        selectionColor={Colors.white}
         onChangeText={handleInputValue}
       />
-      <View
-        style={{
-          width: '30%',
-          backgroundColor: color,
-          height: 2,
-          marginTop: 15,
-        }}
-      />
+      <SearchListSeparator bgColor={color} />
 
       <Animated.FlatList
         style={{
-          width: '100%',
-          marginTop: 20,
-          maxHeight: 280,
+          ...FlatListStyles,
           opacity: flatlistOpacityRef,
         }}
         data={list}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps={'handled'}
-        renderItem={({item}) => (
-          <SearchListItem setPage={setPage} settings={item} />
-        )}
-        ItemSeparatorComponent={() => <View style={{height: 10}}></View>}
+        //@ts-ignore
+        ListHeaderComponentStyle={{
+          backgroundColor: color,
+          ...ListHeaderComponentStyle,
+        }}
+        ListHeaderComponent={isFocused ? <SearchListHeaderComponent /> : null}
+        renderItem={({item}) => <SearchListItem settings={item} />}
+        ItemSeparatorComponent={SearchItemSeparator}
       />
     </Wrapper>
   );

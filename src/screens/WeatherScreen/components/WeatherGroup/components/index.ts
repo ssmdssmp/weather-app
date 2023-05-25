@@ -1,4 +1,4 @@
-import Decoration from './Decoration';
-import DegreeView from './DegreeView';
-import Header from './Header';
-export {Decoration, DegreeView, Header};
+export {default as Decoration} from './Decoration';
+export {default as DegreeView} from './DegreeView';
+export {default as Header} from './Header';
+export {default as YourCityTooltip} from './YourCityTooltip';

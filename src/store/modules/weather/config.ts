@@ -6,6 +6,9 @@ export const CURRENT_WEATHER_URL = {
     `http://api.weatherapi.com/v1/forecast.json?key=${Env.WEATHER_API_KEY}&q=${locationQuery}&days=3&aqi=no&alerts=no`,
   // `http://api.weatherapi.com/v1/current.json?key=${Env.WEATHER_API_KEY}&q=${locationQuery}&aqi=no`
 };
+export const GET_IP_URL = {
+  getIP: () => `http://ip-api.com/json`,
+};
 
 export const initWeatherData: TWeatherData = {
   location: {

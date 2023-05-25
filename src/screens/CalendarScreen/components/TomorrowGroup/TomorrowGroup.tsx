@@ -1,10 +1,9 @@
 import React from 'react';
 import {DetailsWrapper, Headline, TommorowGroupWrapper} from './styled';
 import {Details} from '../../../../components';
-import {getWeatherSelector} from '../../../../store/modules';
-import {useAppSelector} from '../../../../store/types';
-import DegreeView from './components/DegreeView';
-import {useThemeColor} from '../../../../hooks/useThemeColor';
+import {getWeatherSelector, useAppSelector} from '../../../../store';
+import {DegreeView} from './components';
+import {useThemeColor} from '../../../../hooks';
 
 const TomorrowGroup = () => {
   const {theme} = useAppSelector(getWeatherSelector);

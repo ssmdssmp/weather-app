@@ -1,17 +1,18 @@
 import React from 'react';
-import {Search} from './components';
-import {ScreenWrapper} from '../../styled';
-import {useAppSelector} from '../../store/types';
-import {getWeatherSelector} from '../../store/modules';
-import {useThemeColor} from '../../hooks/useThemeColor';
+import {DismissKeyboard, Search} from './components';
+import {useAppSelector, getWeatherSelector} from '../../store';
+import {useThemeColor} from '../../hooks';
 import {StyledScreenWrapper} from './styled';
+import {TSetLocationScreenProps} from './types';
 
-const SetLocationScreen = ({setPage}) => {
+const SetLocationScreen = ({setPage}: TSetLocationScreenProps) => {
   const {theme} = useAppSelector(getWeatherSelector);
   const {screenColor} = useThemeColor(theme);
+
   return (
     <StyledScreenWrapper bgColor={screenColor}>
       <Search setPage={setPage} />
+      <DismissKeyboard />
     </StyledScreenWrapper>
   );
 };

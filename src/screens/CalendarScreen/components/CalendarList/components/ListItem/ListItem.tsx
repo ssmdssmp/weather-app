@@ -2,20 +2,23 @@ import React from 'react';
 import {
   getWeatherSelector,
   TForecastWeatherItem,
-} from '../../../../../../store/modules';
+  useAppSelector,
+} from '../../../../../../store';
 import {SvgXml} from 'react-native-svg';
-import {useFormattedDegrees, useNewWeatherIcon} from '../../../../../../hooks';
-import {useColoredSvg} from '../../../../../../hooks/useColoredSvg';
-import {useAppSelector} from '../../../../../../store/types';
+import {
+  useFormattedDegrees,
+  useWeatherIcon,
+  useColoredSvg,
+  useThemeColor,
+} from '../../../../../../hooks';
 import {Colors, FlexWrapper} from '../../../../../../styled';
 import {AvgTempString, DateString, Wrapper} from './styled';
-import {useThemeColor} from '../../../../../../hooks/useThemeColor';
 
 const ListItem = ({settings}: {settings: TForecastWeatherItem}) => {
   const {theme} = useAppSelector(getWeatherSelector);
   const {color} = useThemeColor(theme);
   console.log(theme);
-  const {smallWeatherIcon} = useNewWeatherIcon({
+  const {smallWeatherIcon} = useWeatherIcon({
     code: settings.day.condition.code,
     isDay: 1,
   });
@@ -35,8 +38,8 @@ const ListItem = ({settings}: {settings: TForecastWeatherItem}) => {
       <DateString>{formattedDate}</DateString>
       <SvgXml xml={coloredIcon} />
       <FlexWrapper direction="row">
-        <AvgTempString>{averageTemperature}</AvgTempString>
-        <AvgTempString>/{minimalTemperature}</AvgTempString>
+        <AvgTempString color={color}>{averageTemperature}</AvgTempString>
+        <AvgTempString color={color}>/{minimalTemperature}</AvgTempString>
       </FlexWrapper>
     </Wrapper>
   );

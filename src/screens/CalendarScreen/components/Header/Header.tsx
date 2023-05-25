@@ -1,9 +1,6 @@
 import React from 'react';
-import {SvgXml} from 'react-native-svg';
-import {searchIcon} from '../../../../assets/kit';
-import {useThemeColor} from '../../../../hooks/useThemeColor';
-import {getWeatherSelector} from '../../../../store/modules';
-import {useAppSelector} from '../../../../store/types';
+import {useThemeColor} from '../../../../hooks';
+import {useAppSelector, getWeatherSelector} from '../../../../store';
 import {HeaderWrapper, StyledText} from './styled';
 
 const Header = () => {
@@ -13,7 +10,6 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <StyledText color={color}>Later in {city}</StyledText>
-      <SvgXml width={20} height={20} fill={color} xml={searchIcon} />
     </HeaderWrapper>
   );
 };

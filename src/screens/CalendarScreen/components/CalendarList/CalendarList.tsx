@@ -1,18 +1,23 @@
 import React from 'react';
-import {View} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
-import {getWeatherSelector} from '../../../../store/modules';
-import {useAppSelector} from '../../../../store/types';
+import {Separator, StyledFlatList} from './styled';
+import {
+  getWeatherSelector,
+  TForecastWeatherItem,
+  useAppSelector,
+} from '../../../../store';
 import {ListItem} from './components';
 
 const CalendarList = () => {
   const {data} = useAppSelector(getWeatherSelector);
+  const renderItem = ({item}: {item: TForecastWeatherItem}) => {
+    return <ListItem settings={item} />;
+  };
   return (
-    <FlatList
-      style={{width: '100%', marginTop: '10%'}}
+    <StyledFlatList
       data={data.forecast.forecastday}
-      ItemSeparatorComponent={() => <View style={{height: 15}} />}
-      renderItem={({item}) => <ListItem settings={item} />}
+      ItemSeparatorComponent={Separator}
+      //@ts-ignore
+      renderItem={renderItem}
     />
   );
 };

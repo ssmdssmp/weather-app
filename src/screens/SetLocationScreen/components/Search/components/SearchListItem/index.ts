@@ -1,1 +1,1 @@
-export {default as SearchListItem} from './SearchListItem';
+export {default} from './SearchListItem';

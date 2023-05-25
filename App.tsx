@@ -1,15 +1,18 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {Provider} from 'react-redux';
-import store from './src/store/store';
+import {store, persistor} from './src/store';
 import {StyledGestureHandlerRootView} from './src/styled';
-import TestScreen from './src/screens/TestScreen';
+import {PersistGate} from 'redux-persist/integration/react';
+import {Navigation} from './src/navigation';
 function App(): JSX.Element {
   return (
     <Provider store={store}>
-      <StyledGestureHandlerRootView>
-        <TestScreen />
-      </StyledGestureHandlerRootView>
+      <PersistGate persistor={persistor}>
+        <StyledGestureHandlerRootView>
+          <Navigation />
+        </StyledGestureHandlerRootView>
+      </PersistGate>
     </Provider>
   );
 }

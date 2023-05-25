@@ -5,14 +5,13 @@ import {
   useFormattedDegrees,
   useFormattedTime,
   useWeatherIcon,
+  useColoredSvg,
+  useThemeColor,
 } from '../../../../../../hooks';
 import {SvgXml} from 'react-native-svg';
 import {smallWeatherIcons} from '../../../../../../assets';
-import {useColoredSvg} from '../../../../../../hooks/useColoredSvg';
-import {useAppSelector} from '../../../../../../store/types';
-import {getWeatherSelector} from '../../../../../../store/modules';
+import {useAppSelector, getWeatherSelector} from '../../../../../../store';
 import {Colors} from '../../../../../../styled';
-import {useThemeColor} from '../../../../../../hooks/useThemeColor';
 
 const HourItem = ({settings}: THourItemProps) => {
   const {theme} = useAppSelector(getWeatherSelector);

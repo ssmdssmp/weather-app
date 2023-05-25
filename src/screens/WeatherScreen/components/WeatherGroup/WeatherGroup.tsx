@@ -1,22 +1,23 @@
 import React from 'react';
-import {useAppSelector} from '../../../../store/types';
-import {getWeatherSelector} from '../../../../store/modules';
+import {getWeatherSelector, useAppSelector} from '../../../../store';
 import {Container} from './styled';
 import {Details} from '../../../../components';
-import {Header, Decoration, DegreeView} from './components';
-import {useNewWeatherIcon} from '../../../../hooks';
-import {useThemeColor} from '../../../../hooks/useThemeColor';
+import {Header, Decoration, DegreeView, YourCityTooltip} from './components';
+import {useThemeColor, useWeatherIcon} from '../../../../hooks';
+import {TComponentWithSetPageProp} from '../../../../types';
 
-const WeatherGroup = () => {
-  const {data, theme} = useAppSelector(getWeatherSelector);
+const WeatherGroup = ({setPage}: TComponentWithSetPageProp) => {
+  const {data, theme, showIsYourCityTooltip} =
+    useAppSelector(getWeatherSelector);
   const code = data.current.condition.code;
   const isDay = data.current.is_day;
-  const {bigWeatherIcon} = useNewWeatherIcon({code, isDay});
+  const {bigWeatherIcon} = useWeatherIcon({code, isDay});
   const {color} = useThemeColor(theme);
 
   return (
     <Container bgColor={color}>
       <Header />
+      {showIsYourCityTooltip && <YourCityTooltip setPage={setPage} />}
       <Decoration />
       <DegreeView weatherIcon={bigWeatherIcon} />
       <Details />

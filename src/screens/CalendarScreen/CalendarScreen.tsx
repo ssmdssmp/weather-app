@@ -1,7 +1,6 @@
 import React from 'react';
-import {useThemeColor} from '../../hooks/useThemeColor';
-import {getWeatherSelector} from '../../store/modules';
-import {useAppSelector} from '../../store/types';
+import {useThemeColor} from '../../hooks';
+import {getWeatherSelector, useAppSelector} from '../../store';
 import {CalendarList, Header, TomorrowGroup} from './components';
 import {StyledScreenWrapper} from './styled';
 

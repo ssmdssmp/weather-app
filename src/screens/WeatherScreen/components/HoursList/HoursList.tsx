@@ -1,14 +1,13 @@
 import React from 'react';
 import {Container, StyledFlatList, StyledHeader} from './styled';
 import HourItem from './components/HourItem';
-import {useAppSelector} from '../../../../store/types';
 import {
+  useAppSelector,
   getWeatherSelector,
   TForecastWeatherHourItem,
-} from '../../../../store/modules';
-
+} from '../../../../store';
+import {useThemeColor} from '../../../../hooks';
 import {ListRenderItem} from 'react-native';
-import {useThemeColor} from '../../../../hooks/useThemeColor';
 
 const HoursList = () => {
   const {data, theme} = useAppSelector(getWeatherSelector);

@@ -1,15 +1,18 @@
 import React from 'react';
-import {FlexWrapper, StyledText} from '../../../../../../styled/styled';
-import {SvgXml} from 'react-native-svg';
+import {FlexWrapper, StyledText, Colors} from '../../../../../../styled';
 import {date} from './config';
-import {useAppSelector} from '../../../../../../store/types';
-import {getWeatherSelector} from '../../../../../../store/modules';
-import {PressableWithMargin} from './styled';
-import {searchIcon} from '../../../../../../assets/kit';
+import {
+  useAppDispatch,
+  useAppSelector,
+  getWeatherSelector,
+  weatherActions,
+} from '../../../../../../store';
+import {Switch} from 'react-native';
 
 const Header = () => {
-  const {data} = useAppSelector(getWeatherSelector);
+  const {data, theme} = useAppSelector(getWeatherSelector);
   const {location} = data;
+  const dispatch = useAppDispatch();
   return (
     <FlexWrapper direction="row" justify="space-between" align="center">
       <FlexWrapper>
@@ -20,10 +23,18 @@ const Header = () => {
           {date}
         </StyledText>
       </FlexWrapper>
-
-      <PressableWithMargin>
-        <SvgXml xml={searchIcon} fill="white" width={20} height={20} />
-      </PressableWithMargin>
+      <Switch
+        value={theme === 'dark' ? true : false}
+        trackColor={{
+          false: 'white',
+          true: 'white',
+        }}
+        thumbColor={Colors.blue}
+        //@ts-ignore
+        onChange={() =>
+          dispatch(weatherActions.setTheme(theme === 'dark' ? 'light' : 'dark'))
+        }
+      />
     </FlexWrapper>
   );
 };

@@ -8,3 +8,8 @@ export const Wrapper = styled(FlexWrapper)`
   border-radius: 8px;
   width: 100%;
 `;
+
+export const StyledText = styled.Text`
+  font-size: 17px;
+  color: white;
+`;

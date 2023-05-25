@@ -4,6 +4,25 @@ export type TWeatherApiRequestPayload = {
 export type TWeatherApiResponse = {
   data: TWeatherData;
 };
+export type TIPApiResponse = {
+  data: typeTIPApiData;
+};
+export type typeTIPApiData = {
+  as: string;
+  city: string;
+  country: string;
+  countryCode: string;
+  isp: string;
+  lat: string;
+  lon: string;
+  org: string;
+  query: string;
+  region: string;
+  regionName: string;
+  status: string;
+  timezone: string;
+  zip: string;
+};
 export type TWeatherError = {
   isError: boolean;
   errorMessage: string;
@@ -18,6 +37,7 @@ export type TWeatherState = {
   loading: boolean;
   error: TWeatherError;
   theme: 'light' | 'dark';
+  showIsYourCityTooltip: boolean;
 };
 
 // type TSelectedWeatherDataType = 'hour' | 'day' | 'current';
@@ -155,4 +175,8 @@ export type TWeatherData = {
   forecast: {
     forecastday: TForecastWeatherItem[];
   };
+};
+
+export type TSetPagePayload = {
+  payload: number;
 };
